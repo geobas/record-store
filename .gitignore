@@ -1,5 +1,6 @@
 target/
 .directory
+.settings
 *.class
 
 ### STS ###
