@@ -1,6 +1,14 @@
 target/
-
+.directory
 *.class
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
