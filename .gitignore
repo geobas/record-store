@@ -1,9 +1,12 @@
-target/
+# OS and Java
 .directory
 .settings
+.DS_Store
+src/**/.DS_Store
+target/
 *.class
 
-### STS ###
+# STS
 .apt_generated
 .classpath
 .factorypath
