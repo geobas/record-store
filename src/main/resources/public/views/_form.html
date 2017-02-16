@@ -1,47 +1,72 @@
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error': userForm.artist.$touched && userForm.artist.$invalid }">
     <label for="artist" class="col-sm-2 control-label">Artist</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.artist" class="form-control" id="artist" placeholder="Artist Name"/>
+        <input type="text" ng-model="record.artist" ng-minlength="5" ng-maxlength="50"
+            class="form-control" id="artist" name="artist" placeholder="Artist Name" required/>
+        <div class="help-block" ng-messages="userForm.artist.$error" ng-show="userForm.artist.$touched">
+            <p ng-message="minlength">Artist name is too short.</p>
+            <p ng-message="maxlength">Artist name is too long.</p>
+            <div ng-message="required">This field is required</div>
+        </div>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
     <label for="name" class="col-sm-2 control-label">Album</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.name" class="form-control" id="name" placeholder="Album Name"/>
+        <input type="text" ng-model="record.name" ng-minlength="5" ng-maxlength="50"
+            class="form-control" id="name" name="name" placeholder="Album Name" required/>
+        <div class="help-block" ng-messages="userForm.name.$error" ng-show="userForm.name.$touched">
+            <p ng-message="minlength">Album name is too short.</p>
+            <p ng-message="maxlength">Album name is too long.</p>
+            <div ng-message="required">This field is required</div>
+        </div>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error': userForm.description.$touched && userForm.description.$invalid }">
     <label for="description" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.description" class="form-control" id="description" placeholder="Album Description"/>
+        <input type="text" ng-model="record.description" ng-minlength="5" ng-maxlength="100"
+            class="form-control" id="description" name="description" placeholder="Album Description" required/>
+        <div class="help-block" ng-messages="userForm.description.$error" ng-show="userForm.description.$touched">
+            <p ng-message="minlength">Description name is too short.</p>
+            <p ng-message="maxlength">Description name is too long.</p>
+            <div ng-message="required">This field is required</div>
+        </div>
     </div>
 </div>
 <div class="form-group">
     <label for="genre" class="col-sm-2 control-label">Genre</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.genre" class="form-control" id="genre" placeholder="Genre"/>
+        <input type="text" ng-model="record.genre" class="form-control" id="genre" placeholder="Genre" />
     </div>
 </div>
 <div class="form-group">
     <label for="condition" class="col-sm-2 control-label">Condition</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.condition" class="form-control" id="condition" placeholder="Album condition"/>
+        <input type="text" ng-model="record.condition" class="form-control" id="condition" placeholder="Album condition" />
     </div>
 </div>
 <div class="form-group">
     <label for="price" class="col-sm-2 control-label">Price</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.price" class="form-control" id="price" placeholder="Price"/>
+        <input type="text" ng-model="record.price" ng-pattern="onlyNumbers"
+            class="form-control" id="price" name="price" placeholder="Price" required/>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error': userForm.year.$touched && userForm.year.$invalid }">
     <label for="year" class="col-sm-2 control-label">Year of release</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.year" class="form-control" id="year" placeholder="Year"/>
+        <input type="text" ng-model="record.year" ng-minlength="4" ng-maxlength="4" ng-pattern="onlyNumbers"
+            class="form-control" id="year" name="year" placeholder="Year" required/>
+        <div class="help-block" ng-messages="userForm.year.$error" ng-show="userForm.year.$touched">
+            <p ng-message="minlength">Year is too short.</p>
+            <p ng-message="maxlength">Year is too long.</p>
+            <div ng-message="required">This field is required</div>
+        </div>
     </div>
 </div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        <input type="submit" class="btn btn-primary" value="Save"/>
+        <input type="submit" class="btn btn-primary" value="Save" ng-disabled="userForm.$invalid"/>
     </div>
 </div>
