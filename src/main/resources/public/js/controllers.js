@@ -1,4 +1,5 @@
-angular.module('app.controllers', []).controller('RecordsListController', function($scope, $state, popupService, $window, Record) {
+angular.module('app.controllers', [])
+.controller('RecordsListController', function($scope, $state, popupService, $window, Record) {
   $scope.records = Record.query(); //fetch all records. Issues a GET to /api/vi/records
 
   $scope.deleteRecord = function(record) { // Delete a Record. Issues a DELETE to /api/v1/records/:id
@@ -9,9 +10,12 @@ angular.module('app.controllers', []).controller('RecordsListController', functi
       });
     }
   };
-}).controller('RecordViewController', function($scope, $stateParams, Record) {
+})
+.controller('RecordViewController', function($scope, $stateParams, Record, Genre) {
   $scope.record = Record.get({ id: $stateParams.id }); //Get a single record.Issues a GET to /api/v1/records/:id
-}).controller('RecordCreateController', function($scope, $state, $stateParams, Record) {
+  $scope.genres = Genre.query();
+})
+.controller('RecordCreateController', function($scope, $state, $stateParams, Record, Genre) {
   $scope.record = new Record();  //create new record instance. Properties will be set via ng-model on UI
   $scope.addRecord = function() { //create a new record. Issues a POST to /api/v1/records
     $scope.record.$save(function() {
@@ -19,7 +23,9 @@ angular.module('app.controllers', []).controller('RecordsListController', functi
     });
   };
   $scope.onlyNumbers = /^\d+$/;
-}).controller('RecordEditController', function($scope, $state, $stateParams, Record) {
+  $scope.genres = Genre.query();
+})
+.controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre) {
   $scope.updateRecord = function() { //Update the edited record. Issues a PUT to /api/v1/records/:id
     $scope.record.$update(function() {
       $state.go('records'); // on success go back to the list i.e. records state.
@@ -32,4 +38,5 @@ angular.module('app.controllers', []).controller('RecordsListController', functi
 
   $scope.loadRecord(); // Load a record which can be edited on UI
   $scope.onlyNumbers = /^\d+$/;
+  $scope.genres = Genre.query();
 });
