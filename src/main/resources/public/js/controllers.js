@@ -1,14 +1,23 @@
 angular.module('app.controllers', [])
-.controller('RecordsListController', function($scope, $state, popupService, $window, Record) {
+.controller('RecordsListController', function($scope, $state, popupService, $window, Record, $dialogs) {
   $scope.records = Record.query(); //fetch all records. Issues a GET to /api/vi/records
 
   $scope.deleteRecord = function(record) { // Delete a Record. Issues a DELETE to /api/v1/records/:id
-    if (popupService.showPopup('Do you really really want to delete this record?')) {
-      record.$delete(function() {
-        $scope.records = Record.query();
-        $state.go('records');
+	  dlg = $dialogs.confirm("Do you really really want to delete this record?", "", {size:'lg',keyboard: false,backdrop: false,windowClass: 'my-class'});
+      dlg.result.then(function(){
+        record.$delete(function() {
+	        $scope.records = Record.query();
+	        $state.go('records');
+        });
+      }, function(){
+    	  // do nothing
       });
-    }
+//    if (popupService.showPopup('Do you really really want to delete this record?')) {
+//      record.$delete(function() {
+//        $scope.records = Record.query();
+//        $state.go('records');
+//      });
+//    }
   };
 })
 .controller('RecordViewController', function($scope, $stateParams, Record, Genre) {
