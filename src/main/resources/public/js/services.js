@@ -9,6 +9,9 @@ angular.module('app.services', [])
 .factory('Genre', function($resource) {
 	return $resource('/api/v1/genres');
 })
+.factory('Condition', function($resource) {
+	return $resource('/api/v1/conditions');
+})
 .service('popupService',function($window){
     this.showPopup=function(message){
         return $window.confirm(message);
