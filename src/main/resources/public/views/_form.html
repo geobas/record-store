@@ -25,7 +25,7 @@
 <div class="form-group" ng-class="{ 'has-error': userForm.description.$touched && userForm.description.$invalid }">
     <label for="description" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.description" ng-minlength="5" ng-maxlength="100"
+        <input type="text" ng-model="record.description" ng-minlength="5" ng-maxlength="1000"
             class="form-control" id="description" name="description" placeholder="Album Description" required/>
         <div class="help-block" ng-messages="userForm.description.$error" ng-show="userForm.description.$touched">
             <p ng-message="minlength">Description name is too short.</p>
