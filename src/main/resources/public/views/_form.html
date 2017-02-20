@@ -6,7 +6,7 @@
         <div class="help-block" ng-messages="userForm.artist.$error" ng-show="userForm.artist.$touched">
             <p ng-message="minlength">Artist name is too short.</p>
             <p ng-message="maxlength">Artist name is too long.</p>
-            <div ng-message="required">This field is required</div>
+            <p ng-message="required">This field is required</p>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
         <div class="help-block" ng-messages="userForm.name.$error" ng-show="userForm.name.$touched">
             <p ng-message="minlength">Album name is too short.</p>
             <p ng-message="maxlength">Album name is too long.</p>
-            <div ng-message="required">This field is required</div>
+            <p ng-message="required">This field is required</p>
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
         <div class="help-block" ng-messages="userForm.description.$error" ng-show="userForm.description.$touched">
             <p ng-message="minlength">Description name is too short.</p>
             <p ng-message="maxlength">Description name is too long.</p>
-            <div ng-message="required">This field is required</div>
+            <p ng-message="required">This field is required</p>
         </div>
     </div>
 </div>
@@ -54,11 +54,15 @@
         </select>        
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error': userForm.price.$touched && userForm.price.$invalid }">
     <label for="price" class="col-sm-2 control-label">Price</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="record.price" ng-pattern="onlyNumbers"
+        <input type="text" ng-model="record.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
             class="form-control" id="price" name="price" placeholder="Price" required/>
+        <div class="help-block" ng-messages="userForm.price.$error" ng-show="userForm.price.$touched">
+        	<p ng-message="pattern">That price is invalid.</p>
+        	<p ng-message="required">This field is required</p>
+        </div>            
     </div>
 </div>
 <div class="form-group" ng-class="{ 'has-error': userForm.year.$touched && userForm.year.$invalid }">
@@ -67,9 +71,10 @@
         <input type="text" ng-model="record.year" ng-minlength="4" ng-maxlength="4" ng-pattern="onlyNumbers"
             class="form-control" id="year" name="year" placeholder="Year" required/>
         <div class="help-block" ng-messages="userForm.year.$error" ng-show="userForm.year.$touched">
-            <p ng-message="minlength">Year is too short.</p>
-            <p ng-message="maxlength">Year is too long.</p>
-            <div ng-message="required">This field is required</div>
+        	<p ng-message="pattern">Only numbers.</p>
+        	<p ng-message="minlength">Year is too short.</p>
+        	<p ng-message="maxlength">Year is too long.</p>
+        	<p ng-message="required">This field is required</p>
         </div>
     </div>
 </div>
