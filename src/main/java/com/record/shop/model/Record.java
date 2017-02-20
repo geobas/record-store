@@ -1,5 +1,6 @@
 package com.record.shop.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +11,23 @@ public class Record {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
+	
 	String artist;
+	
+	@Column(name = "RECORD_NAME")
 	String name;
+	
+	@Column(name = "RECORD_DESC")
 	String description;
+	
 	String genre;
+	
+	@Column(name = "RECORD_CONDITION")
 	String condition;
+	
 	Double price;
+	
+	@Column(name = "RELEASE_YEAR")
 	Integer year;
 	
 	public Record() { }
