@@ -65,6 +65,10 @@
         	<groupId>mysql</groupId>
         	<artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>javax.cache</groupId>
+        	<artifactId>cache-api</artifactId>
+        </dependency>
     </dependencies>
     
 	<build>

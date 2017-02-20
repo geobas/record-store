@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.cache.annotation.CacheResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenreController {
 	
 	@RequestMapping(value = "genres", method = RequestMethod.GET)
+	@CacheResult
 	public ArrayList<Map<String, String>> list() {
 		
 		ArrayList<Map<String, String>> genres = new ArrayList<Map<String, String>>();	
