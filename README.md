@@ -3,11 +3,16 @@
 A Vinyl Record Store to CRUD records.
 
 ## To get this application up and running:
-`git clone git@github.com:geobas/record-store.git`
+- `git clone git@github.com:geobas/record-store.git`
+- Open the *application.properties* file and set your own configurations.
+
+### Prerequisites
+- Java 8
+- Maven > 3.0
 
 ## Test profile
-1. Start application with the following command line argument `spring.profiles.active=test`
+- Start application with the following command line argument `spring.profiles.active=test`
 
 ## Prod profile
-1. Create a database named `record_shop` either on MySQL or MariaDB server
-1. Start application with the following command line argument `spring.profiles.active=prod`
+- Create a database named `record_shop` either on MySQL or MariaDB server
+- Start application with the following command line argument `spring.profiles.active=prod`
