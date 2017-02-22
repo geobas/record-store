@@ -1,11 +1,12 @@
 <div class="container pad-top">
   <a ui-sref="newRecord" class="btn-primary btn-lg nodecoration">Add New Record</a>
+  <input type="text" class="input-small" placeholder="Search Artist, Album, Year etc." ng-model="search" />
   <table class="table recordtable">
       <tr>
           <td><h3>All Records</h3></td>
           <td></td>
       </tr>
-      <tr ng-repeat="record in records">
+      <tr ng-repeat="record in filteredRecords = ( records | filter:search )">
           <td>{{record.artist}}</td>
           <td>{{record.name}}</td>
           <td>{{record.year}}</td>
@@ -15,4 +16,5 @@
           </td>
       </tr>
   </table>
+  <h3 ng-hide="filteredRecords.length">No records found.</h3>
 </div>
