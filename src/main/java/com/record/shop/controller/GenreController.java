@@ -2,7 +2,6 @@ package com.record.shop.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.cache.annotation.CacheResult;
 
@@ -16,14 +15,14 @@ public class GenreController {
 	
 	@RequestMapping(value = "genres", method = RequestMethod.GET)
 	@CacheResult
-	public ArrayList<Map<String, String>> list() {
+	public ArrayList<HashMap<String, String>> list() {
 		
-		ArrayList<Map<String, String>> genres = new ArrayList<Map<String, String>>();	
+		ArrayList<HashMap<String, String>> genres = new ArrayList<>();	
 		
-		Map<String, String> genre1 = new HashMap<String, String>();
-		Map<String, String> genre2 = new HashMap<String, String>();
-		Map<String, String> genre3 = new HashMap<String, String>();
-		Map<String, String> genre4 = new HashMap<String, String>();
+		HashMap<String, String> genre1 = new HashMap<>();
+		HashMap<String, String> genre2 = new HashMap<>();
+		HashMap<String, String> genre3 = new HashMap<>();
+		HashMap<String, String> genre4 = new HashMap<>();
 		
 		genre1.put("id", "1");
 		genre1.put("name", "Heavy Metal");

@@ -36,10 +36,13 @@ angular.module('app.controllers', [])
   $scope.genres = Genre.query();
   $scope.conditions = Condition.query();
 })
-.controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre, Condition) {
+.controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre, Condition, Upload) {
   $scope.updateRecord = function() { //Update the edited record. Issues a PUT to /api/v1/records/:id
-    $scope.record.$update(function() {
-      $state.go('records'); // on success go back to the list i.e. records state.
+	 var image = $scope.record.image;
+	 var uploadUrl = "/api/v1/imageUpload";
+	 $scope.record.$update(function() {
+	   Upload.uploadFileToUrl(image, uploadUrl);
+	   $state.go('records'); // on success go back to the list i.e. records state.
     });
   };
 
