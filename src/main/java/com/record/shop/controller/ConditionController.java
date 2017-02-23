@@ -2,7 +2,6 @@ package com.record.shop.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.cache.annotation.CacheResult;
 
@@ -16,14 +15,14 @@ public class ConditionController {
 	
 	@RequestMapping(value = "conditions", method = RequestMethod.GET)
 	@CacheResult
-	public ArrayList<Map<String, String>> list() {
+	public ArrayList<HashMap<String, String>> list() {
 		
-		ArrayList<Map<String, String>> conditions = new ArrayList<Map<String, String>>();	
+		ArrayList<HashMap<String, String>> conditions = new ArrayList<>();	
 		
-		Map<String, String> condition1 = new HashMap<String, String>();
-		Map<String, String> condition2 = new HashMap<String, String>();
-		Map<String, String> condition3 = new HashMap<String, String>();
-		Map<String, String> condition4 = new HashMap<String, String>();
+		HashMap<String, String> condition1 = new HashMap<>();
+		HashMap<String, String> condition2 = new HashMap<>();
+		HashMap<String, String> condition3 = new HashMap<>();
+		HashMap<String, String> condition4 = new HashMap<>();
 		
 		condition1.put("id", "1");
 		condition1.put("name", "New");
