@@ -27,10 +27,8 @@ angular.module('app.services', [])
            headers: {'Content-Type': undefined}
         })
         .success(function(){
-        	console.log("ok");
         })
         .error(function(){
-        	console.log("error");
         });
      }	
 });

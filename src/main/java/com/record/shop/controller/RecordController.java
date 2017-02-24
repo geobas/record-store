@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,22 +52,31 @@ public class RecordController {
 	}
 
 	@RequestMapping(value = "records/{id}", method = RequestMethod.DELETE)
-	public Record delete(@PathVariable Long id) {
+	public Record delete(@PathVariable Long id) throws IOException {
+		// remove record
 		Record existingRecord = repo.findOne(id);
 		repo.delete(existingRecord);
+		
+		// remove directory
+		File directory = new File(uploadfilepath + "/" + id);
+		FileUtils.deleteDirectory(directory);
+		
 		return existingRecord;
 	}
 	
-	@RequestMapping(value = "imageUpload", method = RequestMethod.POST)
-	public void singleFileUpload(@PathVariable MultipartFile file) {
-        
+	@RequestMapping(value = "imageUpload/{id}", method = RequestMethod.POST)
+	public void singleFileUpload(@PathVariable MultipartFile file, @PathVariable Long id) {        
         try {
         	
         	if ( file.isEmpty() ) throw new Exception("File is empty.");
         	
+        	// Create record's image directory if not already exists
+        	File directory = new File(uploadfilepath + "/" + id);
+        	if ( !directory.exists() ) directory.mkdir();
+        	
             // Get the file and save it
             byte[] bytes = file.getBytes();
-            String fileLocation = new File(uploadfilepath).getAbsolutePath() + "/" + file.getOriginalFilename();
+            String fileLocation = directory + "/" + file.getOriginalFilename();
             FileOutputStream fos = new FileOutputStream(fileLocation);
             fos.write(bytes);
             fos.close();
@@ -77,6 +87,6 @@ public class RecordController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
 	
 }
