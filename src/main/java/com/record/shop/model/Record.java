@@ -30,10 +30,12 @@ public class Record {
 	@Column(name = "RELEASE_YEAR")
 	Integer year;
 	
+	String cover;
+
 	public Record() { }
 
 	public Record(Long id, String artist, String name, String description, String genre, String condition, Double price,
-			Integer year) {
+			Integer year, String cover) {
 		super();
 		this.id = id;
 		this.artist = artist;
@@ -43,6 +45,7 @@ public class Record {
 		this.condition = condition;
 		this.price = price;
 		this.year = year;
+		this.cover = cover;
 	}
 	
 	public Long getId() {
@@ -93,5 +96,10 @@ public class Record {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
 }

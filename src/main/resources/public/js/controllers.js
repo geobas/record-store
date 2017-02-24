@@ -28,10 +28,11 @@ angular.module('app.controllers', [])
 .controller('RecordCreateController', function($scope, $state, $stateParams, Record, Genre, Condition, Upload) {
   $scope.record = new Record();  //create new record instance. Properties will be set via ng-model on UI
   $scope.addRecord = function() { //create a new record. Issues a POST to /api/v1/records
-    $scope.record.$save(function(savedRecord) {
-      var image = $scope.record.image;
+	var cover = $scope.record.cover;
+	$scope.record.cover = $scope.record.cover.name;
+    $scope.record.$save(function(savedRecord) {      
       var uploadUrl = "/api/v1/imageUpload/" + savedRecord.id;
-      if (image) Upload.uploadFileToUrl(image, uploadUrl);
+      if (cover) Upload.uploadFileToUrl(cover, uploadUrl);
       $state.go('records'); // on success go back to the list i.e. records state.
     });
   };
@@ -41,10 +42,11 @@ angular.module('app.controllers', [])
 })
 .controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre, Condition, Upload) {
   $scope.updateRecord = function() { //Update the edited record. Issues a PUT to /api/v1/records/:id
-	 $scope.record.$update(function() {
-	   var image = $scope.record.image;
-	   var uploadUrl = "/api/v1/imageUpload/" + $scope.record.id;
-	   if (image) Upload.uploadFileToUrl(image, uploadUrl);
+	  var cover = $scope.record.cover;
+	  $scope.record.cover = $scope.record.cover.name;
+	  var uploadUrl = "/api/v1/imageUpload/" + $scope.record.id;
+	  $scope.record.$update(function() {
+	   if (cover) Upload.uploadFileToUrl(cover, uploadUrl);
 	   $state.go('records'); // on success go back to the list i.e. records state.
     });
   };

@@ -31,7 +31,11 @@
       <tr>
           <td>Year of release</td>
           <td>{{record.year}}</td>
-      </tr>      
+      </tr>
+      <tr ng-if="record.cover">
+          <td>Album cover</td>
+          <td><img ng-src="images/records/{{record.id}}/{{record.cover}}"/></td>
+      </tr>             
   </table>
   <div>
       <a class="btn btn-primary" ui-sref="editRecord({id:record.id})">Edit</a>
