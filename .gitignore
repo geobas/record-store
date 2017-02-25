@@ -6,6 +6,9 @@ src/**/.DS_Store
 target/
 *.class
 
+# record covers
+images/
+
 # STS
 .apt_generated
 .classpath
