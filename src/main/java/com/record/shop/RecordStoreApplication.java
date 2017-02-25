@@ -20,7 +20,7 @@ public class RecordStoreApplication extends SpringBootServletInitializer
 	
     public static void main( String[] args ) throws IOException
     {
-    	IMAGE_DIR = new File(".").getCanonicalPath() + "/images/";
+    	IMAGE_DIR = new File(".").getCanonicalPath() + "/img/";
     	SpringApplication.run(RecordStoreApplication.class, args);
     }
 }

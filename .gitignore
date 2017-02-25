@@ -7,7 +7,7 @@ target/
 *.class
 
 # record covers
-images/
+img/
 
 # STS
 .apt_generated

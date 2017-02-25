@@ -11,7 +11,7 @@ public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {
 	
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**").addResourceLocations("file:" + RecordStoreApplication.IMAGE_DIR);
+        registry.addResourceHandler("/img/**").addResourceLocations("file:" + RecordStoreApplication.IMAGE_DIR);
         super.addResourceHandlers(registry);  
     }
 }

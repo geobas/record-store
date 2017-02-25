@@ -29,7 +29,7 @@ angular.module('app.controllers', [])
   $scope.record = new Record();  //create new record instance. Properties will be set via ng-model on UI
   $scope.addRecord = function() { //create a new record. Issues a POST to /api/v1/records
 	var cover = $scope.record.cover;
-	$scope.record.cover = $scope.record.cover.name;
+	if ( cover ) $scope.record.cover = $scope.record.cover.name;
     $scope.record.$save(function(savedRecord) {      
       var uploadUrl = "/api/v1/imageUpload/" + savedRecord.id;
       if (cover) Upload.uploadFileToUrl(cover, uploadUrl);
@@ -43,7 +43,7 @@ angular.module('app.controllers', [])
 .controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre, Condition, Upload) {
   $scope.updateRecord = function() { //Update the edited record. Issues a PUT to /api/v1/records/:id
 	  var cover = $scope.record.cover;
-	  $scope.record.cover = $scope.record.cover.name;
+	  if ( cover ) $scope.record.cover = $scope.record.cover.name;
 	  var uploadUrl = "/api/v1/imageUpload/" + $scope.record.id;
 	  $scope.record.$update(function() {
 	   if (cover) Upload.uploadFileToUrl(cover, uploadUrl);
