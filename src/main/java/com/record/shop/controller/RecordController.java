@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,51 +15,41 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.record.shop.model.Record;
-import com.record.shop.repository.RecordRepository;
+import com.record.shop.service.RecordService;
 
 @RestController
 @RequestMapping("api/v1/")
 public class RecordController {
 	
 	@Autowired
-	private RecordRepository repo;
-
+	private RecordService record;
+	
 	@Value("${uploadfilepath}")
-	private String uploadfilepath;
+	private String uploadfilepath;	
 	
 	@RequestMapping(value = "records", method = RequestMethod.GET)
 	public List<Record> list() {
-		return repo.findAll();
+		return record.list();
 	}
 
 	@RequestMapping(value = "records", method = RequestMethod.POST)
 	public Record create(@RequestBody Record Record) {
-		return repo.saveAndFlush(Record);
+		return record.create(Record);
 	}
 
 	@RequestMapping(value = "records/{id}", method = RequestMethod.GET)
 	public Record get(@PathVariable Long id) {
-		return repo.findOne(id);
+		return record.get(id);
 	}
 
 	@RequestMapping(value = "records/{id}", method = RequestMethod.PUT)
 	public Record update(@PathVariable Long id, @RequestBody Record Record) {
-		Record existingRecord = repo.findOne(id);
-		BeanUtils.copyProperties(Record, existingRecord);
-		return repo.saveAndFlush(existingRecord);
+		return record.update(id, Record);
 	}
 
 	@RequestMapping(value = "records/{id}", method = RequestMethod.DELETE)
-	public Record delete(@PathVariable Long id) throws IOException {
-		// remove record
-		Record existingRecord = repo.findOne(id);
-		repo.delete(existingRecord);
-		
-		// remove directory
-		File directory = new File(uploadfilepath + "/" + id);
-		FileUtils.deleteDirectory(directory);
-		
-		return existingRecord;
+	public Record delete(@PathVariable Long id) throws IOException {		
+		return record.delete(id);
 	}
 	
 	@RequestMapping(value = "imageUpload/{id}", method = RequestMethod.POST)
