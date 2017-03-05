@@ -43,16 +43,18 @@ angular.module('app.controllers', [])
 .controller('RecordEditController', function($scope, $state, $stateParams, Record, Genre, Condition, Upload) {
   $scope.updateRecord = function() { //Update the edited record. Issues a PUT to /api/v1/records/:id
 	  var cover = $scope.record.cover;
-	  if ( cover ) $scope.record.cover = $scope.record.cover.name;
+	  if ( cover != null && cover.name != null ) $scope.record.cover = cover.name;
 	  var uploadUrl = "/api/v1/imageUpload/" + $scope.record.id;
 	  $scope.record.$update(function() {
-	   if (cover) Upload.uploadFileToUrl(cover, uploadUrl);
-	   $state.go('records'); // on success go back to the list i.e. records state.
-    });
+		  if ( cover != null && cover != $scope.oldCover ) Upload.uploadFileToUrl(cover, uploadUrl);
+		  $state.go('records'); // on success go back to the list i.e. records state.
+      });
   };
 
   $scope.loadRecord = function() { //Issues a GET request to /api/v1/records/:id to get a record to update
-    $scope.record = Record.get({ id: $stateParams.id });
+	  $scope.record = Record.get({ id: $stateParams.id }, function(data) {
+	    	if (data.cover != null) $scope.oldCover = data.cover; 
+	    });
   };
 
   $scope.loadRecord(); // Load a record which can be edited on UI
